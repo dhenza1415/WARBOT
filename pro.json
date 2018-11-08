@@ -1,0 +1,38 @@
+{
+    "Autokick": {
+        "c0976182976bfd15b08d327ea8db7fbcd": true,
+        "c2f51ecfc3602b7121ab2952074825fe6": true,
+        "cb02d2a2c64b97176606d659e5ba32920": true,
+        "cb9cc00d3a95cfa0bdefb0d4f0877158f": true,
+        "cd2d3e7f60a0765154cc1020726572249": true,
+        "cf139bae0d0b0ceec376c4c9327fa7e2c": true
+    },
+    "Procancel": {
+        "c0976182976bfd15b08d327ea8db7fbcd": true,
+        "c2f51ecfc3602b7121ab2952074825fe6": true,
+        "cb02d2a2c64b97176606d659e5ba32920": true,
+        "cb9cc00d3a95cfa0bdefb0d4f0877158f": true,
+        "cd2d3e7f60a0765154cc1020726572249": true,
+        "cf139bae0d0b0ceec376c4c9327fa7e2c": true
+    },
+    "Proinvite": {
+        "c0976182976bfd15b08d327ea8db7fbcd": true,
+        "c2f51ecfc3602b7121ab2952074825fe6": true,
+        "cb02d2a2c64b97176606d659e5ba32920": true,
+        "cb9cc00d3a95cfa0bdefb0d4f0877158f": true,
+        "cd2d3e7f60a0765154cc1020726572249": true,
+        "cf139bae0d0b0ceec376c4c9327fa7e2c": true
+    },
+    "Proname": {
+        "c2559ca7926f4a631dabca2abc0e94af4": true
+    },
+    "Proqr": {
+        "c0976182976bfd15b08d327ea8db7fbcd": true,
+        "c2f51ecfc3602b7121ab2952074825fe6": true,
+        "cb02d2a2c64b97176606d659e5ba32920": true,
+        "cb9cc00d3a95cfa0bdefb0d4f0877158f": true,
+        "cd2d3e7f60a0765154cc1020726572249": true,
+        "cf139bae0d0b0ceec376c4c9327fa7e2c": true
+    },
+    "gname": {}
+}

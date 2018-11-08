@@ -1,0 +1,21 @@
+{
+    "Invi": false,
+    "Jscancel": true,
+    "ablacklist": false,
+    "addadmin": false,
+    "addowner": false,
+    "addstaff": false,
+    "autoJoin": true,
+    "autoJoinTicket": true,
+    "blacklist": {
+        "u4413666414f99ecd5c7699385c1b54ea": true,
+        "ue5ff344d5e61e9c06991622063dd19ee": true
+    },
+    "bymsg": {},
+    "dblacklist": false,
+    "deladmin": false,
+    "delowner": false,
+    "delstaff": false,
+    "leftmsg": "",
+    "message": "thanks for add"
+}
