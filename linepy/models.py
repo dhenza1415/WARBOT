@@ -13,7 +13,7 @@ class Models(Object):
     """Text"""
 
     def log(self, text):
-        print("[ %s ] %s" % (str(datetime.now()), text))
+        print("[%s][%s]" % (str(datetime.now()), text))
 
     """File"""
 

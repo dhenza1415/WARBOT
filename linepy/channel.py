@@ -20,7 +20,7 @@ class Channel(object):
         self.__loginChannel()
 
     def __logChannel(self, text):
-        self.client.log('[%s] : Success login to %s' % (self.client.profile.displayName, text))
+        self.client.log('[%s] login to %s' % (self.client.profile.displayName, text))
 
     def __loginChannel(self):
         self.isLogin = True
