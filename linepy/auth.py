@@ -25,6 +25,8 @@ class Auth(object):
         self.poll       = Session(self.server.LINE_HOST_DOMAIN, self.server.Headers, self.server.LINE_POLL_QUERY_PATH_FIR).Talk()
         self.call       = Session(self.server.LINE_HOST_DOMAIN, self.server.Headers, self.server.LINE_CALL_QUERY_PATH).Call()
         self.channel    = Session(self.server.LINE_HOST_DOMAIN, self.server.Headers, self.server.LINE_CHAN_QUERY_PATH).Channel()
+        self.square     = Session(self.server.LINE_HOST_DOMAIN, self.server.Headers, self.server.LINE_SQUARE_QUERY_PATH).Square()
+        
         self.revision = self.poll.getLastOpRevision()
         self.isLogin = True
 
@@ -59,9 +61,9 @@ class Auth(object):
         if systemName is None:
             systemName=self.server.SYSTEM_NAME
         if self.server.EMAIL_REGEX.match(_id):
-            self.provider = IdentityProvider.LINE
+            self.provider = IdentityProvider.LINE       # LINE
         else:
-            self.provider = IdentityProvider.NAVER_KR
+            self.provider = IdentityProvider.NAVER_KR   # NAVER
         
         if appName is None:
             appName=self.server.APP_NAME

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from akad.ttypes import Message
 from random import randint
+
 import json, ntpath
 
 def loggedIn(func):
@@ -62,27 +63,6 @@ class Talk(object):
     """Message"""
 
     @loggedIn
-    def sendFooter(self, to, text, link, icon, footer):
-        contentMetadata = {'AGENT_LINK': link, 'AGENT_ICON': icon, 'AGENT_NAME': footer}
-        return self.sendMessage(to, text, contentMetadata)
-        
-    @loggedIn
-    def sendMentionFooter(self, to, text, mid, link, icon, footer):
-        arr = []
-        list_text=''
-        list_text+=' @dzin '
-        text=text+list_text
-        name='@dzin '
-        ln_text=text.replace('\n',' ')
-        if ln_text.find(name):
-            line_s=int(ln_text.index(name))
-            line_e=(int(line_s)+int(len(name)))
-        arrData={'S': str(line_s), 'E': str(line_e), 'M': mid}
-        arr.append(arrData)
-        contentMetadata={'AGENT_LINK': link, 'AGENT_ICON': icon, 'AGENT_NAME': footer,'MENTION':str('{"MENTIONEES":' + json.dumps(arr).replace(' ','') + '}')}
-        return self.sendMessage(to, text, contentMetadata)
-        
-    @loggedIn
     def sendMessage(self, to, text, contentMetadata={}, contentType=0):
         msg = Message()
         msg.to, msg._from = to, self.profile.mid
@@ -92,30 +72,7 @@ class Talk(object):
             self._messageReq[to] = -1
         self._messageReq[to] += 1
         return self.talk.sendMessage(self._messageReq[to], msg)
-
-    @loggedIn
-    def sendMusic(self, to, musicid, title, artist, thumblink, link):
-	    contentMetadata = {
-		    'text': title,
-		    'subText': artist,
-		    'id': musicid,
-		    'previewUrl': thumblink,
-		    'linkUri': link,
-		    'i-linkUri': link,
-		    'a-linkUri': link,
-		    'i-installUrl': link,
-		    'a-installUrl': link,
-		    'a-packageName': 'jp.linecorp.linemusic.android',
-		    'type': 'mt',
-		    'countryCode': 'JP',
-		    'ORGCONTP': 'MUSIC'
-	    }
-	    return self.sendMessage(to, '', contentMetadata, 19)
-		
-    @loggedIn	
-    def sendMusicObject(self, to, contentMetadata):	
-        return self.sendMessage(to, '', contentMetadata, 19)
-
+    
     """ Usage:
         @to Integer
         @text String
@@ -154,35 +111,6 @@ class Talk(object):
         return self.sendMessage(to, text, contentMetadata)
 
     @loggedIn
-    def getMention(self, to, text="", mids=[]):
-        arrData = ""
-        arr = []
-        mention = "@zeroxyuuki "
-        if mids == []:
-            raise Exception("Invalid mids")
-        if "@!" in text:
-            if text.count("@!") != len(mids):
-                raise Exception("Invalid mids")
-            texts = text.split("@!")
-            textx = ""
-            for mid in mids:
-                textx += str(texts[mids.index(mid)])
-                slen = len(textx)
-                elen = len(textx) + 15
-                arrData = {'S':str(slen), 'E':str(elen - 4), 'M':mid}
-                arr.append(arrData)
-                textx += mention
-            textx += str(texts[len(mids)])
-        else:
-            textx = ""
-            slen = len(textx)
-            elen = len(textx) + 15
-            arrData = {'S':str(slen), 'E':str(elen - 4), 'M':mids[0]}
-            arr.append(arrData)
-            textx += mention + str(text)
-        self.sendMessage(to, textx, {'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}, 0)
-
-    @loggedIn
     def sendSticker(self, to, packageId, stickerId):
         contentMetadata = {
             'STKVER': '100',
@@ -194,7 +122,7 @@ class Talk(object):
     @loggedIn
     def sendContact(self, to, mid):
         contentMetadata = {'mid': mid}
-        return self.talk.sendMessage(to, '', contentMetadata, 13)
+        return self.sendMessage(to, '', contentMetadata, 13)
 
     @loggedIn
     def sendGift(self, to, productId, productType):
@@ -218,13 +146,6 @@ class Talk(object):
         self._messageReq[to] += 1
         return self.talk.sendMessageAwaitCommit(self._messageReq[to], msg)
 
-    @loggedIn
-    def sendText(self, Tomid, text):
-        msg = Message()
-        msg.to = Tomid
-        msg.text = text
-        return self.talk.sendMessage(0, msg)
-        
     @loggedIn
     def unsendMessage(self, messageId):
         self._unsendMessageReq += 1
@@ -273,16 +194,6 @@ class Talk(object):
     """Object"""
 
     @loggedIn
-    def sendImageFooter(self, to, path, link, icon, footer):
-        objectId = self.sendMessage(to=to, text=None, contentMetadata = {'AGENT_LINK': link, 'AGENT_ICON': icon, 'AGENT_NAME': footer}, contentType = 1).id
-        return self.uploadObjTalk(path=path, type='image', returnAs='bool', objId=objectId)
-
-    @loggedIn
-    def sendImageWithFooter(self, to, url, link, icon, footer):
-        path = self.downloadFileURL(url, 'path')
-        return self.sendImageFooter(to, path, link, icon, footer)
-
-    @loggedIn
     def sendImage(self, to, path):
         objectId = self.sendMessage(to=to, text=None, contentType = 1).id
         return self.uploadObjTalk(path=path, type='image', returnAs='bool', objId=objectId)
@@ -300,16 +211,6 @@ class Talk(object):
     def sendGIFWithURL(self, to, url):
         path = self.downloadFileURL(url, 'path')
         return self.sendGIF(to, path)
-
-    @loggedIn
-    def sendVideoFooter(self, to, path, link, icon, footer):
-        objectId = self.sendMessage(to=to, text=None, contentMetadata = {'VIDLEN': '60000','DURATION': '60000', 'AGENT_LINK': link, 'AGENT_ICON': icon, 'AGENT_NAME': footer}, contentType = 2).id
-        return self.uploadObjTalk(path=path, type='video', returnAs='bool', objId=objectId)
-
-    @loggedIn
-    def sendVideoWithFooter(self, to, url, link, icon, footer):
-        path = self.downloadFileURL(url, 'path')
-        return self.sendVideoFooter(to, path, link, icon, footer)
 
     @loggedIn
     def sendVideo(self, to, path):

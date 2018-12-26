@@ -3,10 +3,11 @@ from akad.ttypes import Message
 from .auth import Auth
 from .models import Models
 from .talk import Talk
+from .square import Square
 from .call import Call
 from .timeline import Timeline
 
-class LINE(Auth, Models, Talk, Call, Timeline):
+class LINE(Auth, Models, Talk, Square, Call, Timeline):
 
     def __init__(self, idOrAuthToken=None, passwd=None, certificate=None, systemName=None, appName=None, showQr=False, keepLoggedIn=True):
         
@@ -21,9 +22,12 @@ class LINE(Auth, Models, Talk, Call, Timeline):
         self.__initAll()
 
     def __initAll(self):
+
         self.profile    = self.talk.getProfile()
         self.groups     = self.talk.getGroupIdsJoined()
+
         Models.__init__(self)
         Talk.__init__(self)
+        Square.__init__(self)
         Call.__init__(self)
         Timeline.__init__(self)
