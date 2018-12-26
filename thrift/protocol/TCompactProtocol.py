@@ -42,8 +42,6 @@ def make_helper(v_from, container):
             return func(self, *args, **kwargs)
         return nested
     return helper
-
-
 writer = make_helper(VALUE_WRITE, CONTAINER_WRITE)
 reader = make_helper(VALUE_READ, CONTAINER_READ)
 
@@ -95,7 +93,6 @@ class CompactType(object):
     SET = 0x0A
     MAP = 0x0B
     STRUCT = 0x0C
-
 
 CTYPES = {
     TType.STOP: CompactType.STOP,
