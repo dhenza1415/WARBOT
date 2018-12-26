@@ -69,9 +69,9 @@ class TMessageType(object):
 
 
 class TProcessor(object):
-    """Base class for processor, which works on two streams."""
+    """Base class for procsessor, which works on two streams."""
 
-    def process(self, iprot, oprot):
+    def process(iprot, oprot):
         pass
 
 
